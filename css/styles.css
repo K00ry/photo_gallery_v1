@@ -11,6 +11,14 @@
 
 /* main Styles */
 
+header,
+.main-content{
+
+max-width: 1250px;
+
+}
+
+
 
 
 header{
@@ -54,12 +62,25 @@ text-align: center;
 z-index: 99;
 }
 
-.overlay-img{
 
- 	margin-top: 40px;
+.container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 
-	width: 80%;
-	height: 300px;
+	
+	height:60%;
+	margin: auto;
+	margin-bottom: 20px;
+
+
+}
+
+.container img{
+
+ 	margin: auto;
+	width: 100%;
+	height: 350px;
 }
 
 
@@ -68,34 +89,30 @@ p{
 	font-size: 1.3em;
 	font-weight: 700;
 	color: #F7F5FF;
-	margin:0 20px; 
+	margin:30px 20px; 
 
 }
 
 .container{
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	height:60%;
+	flex-direction: column;
+	
+	height:80%;
 	margin: auto;
 	margin-bottom: 20px;
 
 
 }
 
-.cursor-right,
-.cursor-left{
+.next,
+.previous {
 	
-   
+   cursor: pointer;
     width: 40px;
     height: 40px;
     font-size: 3em;
     color: #fff; 
     margin: auto; 
-    
-   
-
-
 }
 
 
@@ -122,10 +139,7 @@ p{
 	margin: auto;
 
 }
-li{
 
-	text-align: center;
-}
 
 .image{
 	height: 200px;
@@ -139,7 +153,7 @@ margin: 20px auto;
 
 
 
-.photogallery img{
+.photogallery a{
 	margin: auto;
 	border-radius: 5px;
 }
@@ -154,20 +168,24 @@ margin: 20px auto;
 .photogallery{
  flex-direction: row;
  flex-wrap: wrap;
- align-content: flex-start;
+ align-content: space-between;
  justify-content: space-between;
 }
-.image-link{	
-margin: 20px 0;
+
+.container{
+	flex-direction: row;
+
+
 }
 
 
+.container img{
 
 
-
-
-
-
+ 	margin: auto;
+	width: 80%;
+	height: 350px;
+}
 
 
 }
@@ -183,7 +201,7 @@ margin: 20px 0;
 
 .photogallery{
  
-
+align-content: space-between;
 
  width: 980px;
 
@@ -191,12 +209,6 @@ margin: 20px 0;
 }
 
 
-/*creates class for 1024 pixel grid JS filtering*/
-	.filtered {
-		margin-right: 60px !important;
-	}
-
-}	
 
 
 
