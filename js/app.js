@@ -114,7 +114,7 @@ var galleryItems = [{
         "alt": "New York City is an international metropolis built on the shoulders of immigrants and their descendants."
     },
 
-]
+];
 
 
 $(document).ready(function() {
@@ -125,16 +125,15 @@ $(document).ready(function() {
     var $container = $('<div class="container"></div>');
     var $pervbutton = $('<div class="previous"><</div>');
     var $image = $("<img>");
-    var $video = $('<iframe width="420" height="315" frameborder="0" allowfullscreen></iframe>')
+    var $video = $('<iframe width="420" height="315" frameborder="0" allowfullscreen></iframe>');
     var $nextbutton = $('<div class="next">></div>');
     var $caption = $("<p></p>");
     var tracker;
+
     //asembeling the overlay
 
     $overlay.append($container);
     $container.append($pervbutton);
-
-
     $container.append($nextbutton);
     $overlay.append($caption);
 
@@ -152,7 +151,7 @@ $(document).ready(function() {
         itemsHtml += '<a href="images/' + value.href +
             '"><img src="images/thumbnails/' + value.href +
             '" title="' + value.title + '" alt="' + value.alt +
-            '" class="' + count + '"></a>'
+            '" class="' + count + '"></a>';
         count++;
 
     });
@@ -167,7 +166,7 @@ $(document).ready(function() {
         $video.attr("src", galleryItems[tracker].src);
         $video.after($nextbutton);
         $overlay.fadeIn(500);
-    };
+    }
 
 
 
@@ -177,12 +176,12 @@ $(document).ready(function() {
     function image_overlay() {
 
         $container.append($image);
-        $image.before($pervbutton)
+        $image.before($pervbutton);
         $image.attr("src", 'images/' + galleryItems[tracker].href);
         $image.after($nextbutton);
         $overlay.fadeIn(500);
 
-    };
+    }
 
 
 
@@ -198,7 +197,7 @@ $(document).ready(function() {
 
         event.preventDefault();
         tracker = $(this).index();
-        var photo = $(this).attr("href");
+
         var description = $(this).children("img").attr("alt");
         if (tracker >= 12) {
             video_overlay();
@@ -239,7 +238,7 @@ $(document).ready(function() {
 
 
 
-    var galleryLenght = $(".photogallery a").length
+    var galleryLenght = $(".photogallery a").length;
 
 
 
@@ -248,27 +247,29 @@ $(document).ready(function() {
     $nextbutton.click(function() {
 
         tracker++;
-        image_overlay();
-        
-        var cap = $("#overlay p");
 
-        
-        cap.text(galleryItems[tracker].alt);
 
-        if (tracker >= 12) {
-            $image.hide();
-            video_overlay();
+        if (tracker < 12) {
+
+            $image.attr("src", 'images/' + galleryItems[tracker].href);
+
         }
 
+        if (tracker === 12) {
+            $image.replaceWith($video);
 
+        }
 
-        if (tracker >= galleryLenght) {
+        if (tracker === galleryLenght) {
             tracker = 0;
-            $video.hide();
-            image_overlay();
-
-
+            $video.replaceWith($image);
+            $image.attr("src", 'images/' + galleryItems[tracker].href);
         }
+
+        $video.attr("src", galleryItems[tracker].src);
+        $caption.text(galleryItems[tracker].alt);
+
+
     });
 
     // previous button
@@ -276,32 +277,27 @@ $(document).ready(function() {
     $pervbutton.click(function() {
 
         tracker--;
-        image_overlay();
-        var cap = $("#overlay p");
 
-        
-        cap.text(galleryItems[tracker].alt);
-
-        if (tracker <= 0 ) {
-
+        if (tracker === 11) {
+            $video.replaceWith($image);
+        }
+        if (tracker <= 0) {
             tracker = 15;
-            
+            $image.replaceWith($video);
+            $video.attr("src", galleryItems[tracker].src);
         }
-        if (tracker >= 12){
-            $image.hide();
-            video_overlay();
-        }
-        if (tracker < 12){
-            $video.hide();
-            image_overlay();
+        if (tracker < 16 && tracker > 12) {
+
+            $video.attr("src", galleryItems[tracker].src);
         }
 
 
-
-
+        $image.attr("src", 'images/' + galleryItems[tracker].href);
+        $caption.text(galleryItems[tracker].alt);
 
 
     });
+
 
 
 
