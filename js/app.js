@@ -1,89 +1,78 @@
+// creating a JSON file for the gallery Items
+
 var galleryItems = [{
-        "type": "image",
         "href": "1.jpg",
         "title": "Hay Bales",
         "alt": "I love hay bales. Took this snap on a drive through the countryside past some straw fields."
     },
 
     {
-        "type": "image",
         "href": "2.jpg",
         "title": "Lake",
         "alt": "The lake was so calm today. We had a great view of the snow on the mountains from here."
     },
 
     {
-        "type": "image",
         "href": "3.jpg",
         "title": "Canyon",
         "alt": "I hiked to the top of the mountain and got this picture of the canyon and trees below."
     },
 
     {
-        "type": "image",
         "href": "4.jpg",
         "title": "Iceberg",
         "alt": "It was amazing to see an iceberg up close, it was so cold but didn’t snow today."
     },
 
     {
-        "type": "image",
         "href": "5.jpg",
         "title": "Desert",
         "alt": "The red cliffs were beautiful. It was really hot in the desert but we did a lot of walking through the canyons."
     },
 
     {
-        "type": "image",
         "href": "6.jpg",
         "title": "Fall",
         "alt": "Fall is coming, I love when the leaves on the trees start to change color."
     },
 
     {
-        "type": "image",
         "href": "7.jpg",
         "title": "Plantation",
         "alt": "I drove past this plantation yesterday, everything is so green!"
     },
 
     {
-        "type": "image",
         "href": "8.jpg",
         "title": "Dunes",
         "alt": "My summer vacation to the Oregon Coast. I love the sandy dunes!"
     },
 
     {
-        "type": "image",
         "href": "9.jpg",
         "title": "Countryside Lane",
         "alt": "We enjoyed a quiet stroll down this countryside lane."
     },
 
     {
-        "type": "image",
         "href": "10.jpg",
         "title": "Sunset",
         "alt": "Sunset at the coast! The sky turned a lovely shade of orange."
     },
 
     {
-        "type": "image",
         "href": "11.jpg",
         "title": "Cave",
         "alt": "I did a tour of a cave today and the view of the landscape below was breathtaking."
     },
 
     {
-        "type": "image",
         "href": "12.jpg",
         "title": "Bluebells",
         "alt": "I walked through this meadow of bluebells and got a good view of the snow on the mountain before the fog came in."
     },
 
     {
-        "type": "video",
         "href": "13.jpg",
         "src": "https://www.youtube.com/embed/SbeHjcLOkgs?autoplay=false",
         "title": "Travel Love",
@@ -91,7 +80,6 @@ var galleryItems = [{
     },
 
     {
-        "type": "video",
         "href": "14.jpg",
         "src": "https://www.youtube.com/embed/JxYConpTVZI?autoplay=false",
         "title": "Hyper Travel",
@@ -99,7 +87,6 @@ var galleryItems = [{
     },
 
     {
-        "type": "video",
         "href": "15.jpg",
         "src": "https://www.youtube.com/embed/GCcdBx4UUgk?autoplay=false",
         "title": "Travel",
@@ -107,7 +94,6 @@ var galleryItems = [{
     },
 
     {
-        "type": "video",
         "href": "16.jpg",
         "src": "https://www.youtube.com/embed/MtCMtC50gwY?autoplay=false",
         "title": "NewYork Travel",
@@ -125,9 +111,11 @@ $(document).ready(function() {
     var $container = $('<div class="container"></div>');
     var $pervbutton = $('<div class="previous"><</div>');
     var $image = $("<img>");
-    var $video = $('<iframe width="420" height="315" frameborder="0" allowfullscreen></iframe>');
+    var $video = $('<iframe style="width:80%;height:350px;" frameborder="0" allowfullscreen></iframe>');
+    var $close = $('<span id="close">x</span>')
     var $nextbutton = $('<div class="next">></div>');
     var $caption = $("<p></p>");
+    var galleryLenght = $(".photogallery a").length;
     var tracker;
 
     //asembeling the overlay
@@ -135,6 +123,7 @@ $(document).ready(function() {
     $overlay.append($container);
     $container.append($pervbutton);
     $container.append($nextbutton);
+    $container.append($close);
     $overlay.append($caption);
 
 
@@ -147,7 +136,6 @@ $(document).ready(function() {
     var count = 0;
     $.each(galleryItems, function(item, value) {
 
-
         itemsHtml += '<a href="images/' + value.href +
             '"><img src="images/thumbnails/' + value.href +
             '" title="' + value.title + '" alt="' + value.alt +
@@ -155,6 +143,37 @@ $(document).ready(function() {
         count++;
 
     });
+
+    //keyup for input search
+
+    $("input").keyup(function() {
+
+        var $val = $(this).val().toLowerCase();
+        var $photos = $(".photogallery a").find("img");
+        $photos.parent().fadeOut(500);
+        $photos.each(function() {
+
+            var $title = $(this).attr("title").toLowerCase();
+            if ($title.indexOf($val) != -1) {
+                $(this).parent().fadeIn(500);
+            }
+        });
+
+    });
+
+
+
+    // function to show overlay with Image
+
+    function image_overlay() {
+
+        $container.append($image);
+        $image.before($pervbutton);
+        $image.attr("src", 'images/' + galleryItems[tracker].href);
+        $image.after($nextbutton);
+        $overlay.fadeIn(500);
+
+    }
 
 
 
@@ -171,17 +190,7 @@ $(document).ready(function() {
 
 
 
-    // function to show overlay with Image
 
-    function image_overlay() {
-
-        $container.append($image);
-        $image.before($pervbutton);
-        $image.attr("src", 'images/' + galleryItems[tracker].href);
-        $image.after($nextbutton);
-        $overlay.fadeIn(500);
-
-    }
 
 
 
@@ -200,8 +209,11 @@ $(document).ready(function() {
 
         var description = $(this).children("img").attr("alt");
         if (tracker >= 12) {
+
             video_overlay();
-        } else {
+        }
+        if (tracker < 12) {
+
             image_overlay();
         }
 
@@ -210,44 +222,11 @@ $(document).ready(function() {
     });
 
 
-
-
-
-
-
-
-    //keyup for input search
-
-    $("input").keyup(function() {
-        var $val = $(this).val().toLowerCase();
-        var $photos = $(".photogallery a").find("img");
-        $photos.parent().fadeOut(500);
-
-        $photos.each(function() {
-
-            var $title = $(this).attr("title").toLowerCase();
-
-            if ($title.indexOf($val) != -1) {
-
-                $(this).parent().fadeIn(500);
-
-            }
-        });
-
-    });
-
-
-
-    var galleryLenght = $(".photogallery a").length;
-
-
-
     // next button 
 
     $nextbutton.click(function() {
 
         tracker++;
-
 
         if (tracker < 12) {
 
@@ -260,7 +239,7 @@ $(document).ready(function() {
 
         }
 
-        if (tracker === galleryLenght) {
+        if (tracker === 16) {
             tracker = 0;
             $video.replaceWith($image);
             $image.attr("src", 'images/' + galleryItems[tracker].href);
@@ -286,7 +265,7 @@ $(document).ready(function() {
             $image.replaceWith($video);
             $video.attr("src", galleryItems[tracker].src);
         }
-        if (tracker < 16 && tracker > 12) {
+        if (tracker < 16 && tracker >= 12) {
 
             $video.attr("src", galleryItems[tracker].src);
         }
@@ -301,14 +280,45 @@ $(document).ready(function() {
 
 
 
+    //closing the overlay by clicking on it.
+
+    $close.click(function() {
+        $image.remove();
+        $video.remove();
+        $overlay.fadeOut(500);
+
+    });
 
 
 
 
 
+    // esc key function.
+
+    $(document).keydown(function(e) {
+        if (e.which == 27) {
+            $close.click();
+        };
+    });
+
+    // next key function.
 
 
+    $(document).keydown(function(e) {
+        if (e.which == 39) {
+            $nextbutton.click();
+        };
+    });
 
+
+    // previous key function.
+
+
+    $(document).keydown(function(e) {
+        if (e.which == 37) {
+            $pervbutton.click();
+        };
+    });
 
 
 

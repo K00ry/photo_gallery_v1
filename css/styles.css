@@ -1,215 +1,165 @@
-
-*, *:before, *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+    *,
+*:before,
+*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
-
-
-
 
 
 /* main Styles */
 
-header,
-.main-content{
 
-max-width: 1250px;
-
-}
-
-
-
-
-header{
- display: flex;
- justify-content: center;
- height: 100px;
- background: #fff; 
- width: 100%;
+.main-content {
+    
 
 }
 
+header {
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    background: #fff;
+    width: 100%;
+    position:fixed;
 
-header input{
-  margin: auto;
-width: 280px;
-height: 40px;
-padding :16px;
-box-shadow: 0 0 20px 2px black;
 }
 
+header input {
+    margin: auto;
+    width: 280px;
+    height: 40px;
+    padding: 16px;
+    box-shadow: 0 0 20px 2px #C7DAEC;
+}
 
 body {
-  font-family: 'Poiret One', cursive;
-  color: #222;
-  background: #C7DAEC;
-  width: 100%;
+    font-family: 'Poiret One', cursive;
+    color: #222;
+    background: #C7DAEC;
+    width: 100%;
 }
+
 
 /* overlay Styles */
 
-
-#overlay{
-display: none;
-position: fixed;
-background-color: rgba(0,0,0,0.6);
-width: 100%;
-height: 100%;
-top: 0;
-left:0;
-text-align: center;
-z-index: 99;
+#overlay {
+    display: none;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    z-index: 99;
 }
 
-
-.container{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-
-	
-	height:60%;
-	margin: auto;
-	margin-bottom: 20px;
-
-
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 60%;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
-.container img{
-
- 	margin: auto;
-	width: 100%;
-	height: 350px;
+.container img {
+    margin: auto;
+    width: 100%;
+    height: 350px;
 }
 
-
-p{
-
-	font-size: 1.3em;
-	font-weight: 700;
-	color: #F7F5FF;
-	margin:30px 20px; 
-
+#close {
+    display: block;
+    height: 22px;
+    width: 25px;
+    background-color: red;
+    color: #fff;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    o
 }
 
-.container{
-	display: flex;
-	flex-direction: column;
-	
-	height:80%;
-	margin: auto;
-	margin-bottom: 20px;
+p {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #F7F5FF;
+    margin: 30px 20px;
+}
 
-
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 .next,
 .previous {
-	
-   cursor: pointer;
+    cursor: pointer;
     width: 40px;
     height: 40px;
     font-size: 3em;
-    color: #fff; 
-    margin: auto; 
+    color: #fff;
+    margin: auto;
 }
-
-
 
 
 /* Gallery Styles */
 
-.main-content{
+.main-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.photogallery {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.photogallery img {
+    margin: auto;
+    border-radius: 5px;
+
+}
+
+.photogallery a {
 	display: flex;
-	flex-direction: column;
-	width: 100%;
+	margin:20px 0 ;
 
 }
 
-
-
-
-
-
-.photogallery{
-	display: flex;
-	flex-direction: column;
-	width:90%;
-	margin: auto;
-
+@media screen and (min-width: 760px) {
+    /*regular tablets & smaller desktops*/
+    .photogallery {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: space-between;
+        justify-content: space-between;
+    }
+    .container {
+        flex-direction: row;
+    }
+    .container img {
+        margin: auto;
+        width: 80%;
+        height: 350px;
+    }
 }
 
-
-.image{
-	height: 200px;
-margin: 20px auto;
-
-}
-.vid{ width:200px;
-	height: 200px;
-
-	 }
-
-
-
-.photogallery a{
-	margin: auto;
-	border-radius: 5px;
-}
-
-
-
-
-
-@media screen and (min-width: 760px) { /*regular tablets & smaller desktops*/
-
-
-.photogallery{
- flex-direction: row;
- flex-wrap: wrap;
- align-content: space-between;
- justify-content: space-between;
-}
-
-.container{
-	flex-direction: row;
-
-
-}
-
-
-.container img{
-
-
- 	margin: auto;
-	width: 80%;
-	height: 350px;
-}
-
-
-}
-
-
-
-
-
-@media screen and (min-width: 1024px) { /*larger desktops*/
-
-
-
-
-.photogallery{
- 
-align-content: space-between;
-
- width: 980px;
-
-
-}
-
-
-
-
-
-
+@media screen and (min-width: 1024px) {
+    /*larger desktops*/
+    .photogallery {
+        align-content: space-between;
+        width: 980px;
+    }
