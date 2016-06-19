@@ -21,8 +21,10 @@
     header input {
         margin: auto;
         width: 280px;
-        height: 40px;
+        height: auto;
         padding: 16px;
+        border: 2px solid #C9EBFF;
+    	border-radius: 5px;
         box-shadow: 0 0 20px 2px #C7DAEC;
     }
     
@@ -77,10 +79,11 @@
     }
     
     p {
+
         font-size: 1.3em;
         font-weight: 700;
         color: #F7F5FF;
-        margin: 30px 20px;
+        margin: auto;
     }
     
     .container {
@@ -96,7 +99,7 @@
         cursor: pointer;
         width: 40px;
         height: 40px;
-        font-size: 3em;
+        font-size: 4em;
         color: #fff;
         margin: auto;
     }
@@ -126,8 +129,8 @@
         margin: 20px 0;
     }
     
-    @media screen and (min-width: 760px) {
-        /*regular tablets & smaller desktops*/
+    @media screen and (min-width: 760px) { /*regular tablets & smaller desktops*/
+
         .photogallery {
             flex-direction: row;
             flex-wrap: wrap;
@@ -142,6 +145,7 @@
             width: 80%;
             height: 350px;
         }
+        p{max-width: 600px;}
     }
     
     @media screen and (min-width: 1024px) {
