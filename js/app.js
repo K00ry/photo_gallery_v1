@@ -111,7 +111,7 @@ $(document).ready(function() {
     var $container = $('<div class="container"></div>');
     var $pervbutton = $('<div class="previous"><</div>');
     var $image = $("<img>");
-    var $video = $('<iframe style="width:80%;height:350px;margin:auto;" frameborder="0" allowfullscreen></iframe>');
+    var $video = $('<iframe style="width:800px;height:350px;margin:auto;" frameborder="0" allowfullscreen></iframe>');
     var $close = $('<span id="close">x</span>')
     var $nextbutton = $('<div class="next">></div>');
     var $caption = $("<p></p>");
