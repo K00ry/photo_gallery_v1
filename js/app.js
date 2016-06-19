@@ -137,7 +137,7 @@ $(document).ready(function() {
     $.each(galleryItems, function(item, value) {
 
         itemsHtml += '<a href="images/' + value.href +
-            '"><img src="images/thumbnails/' + value.href +
+            '"><img src="images/Thumbnails/' + value.href +
             '" title="' + value.title + '" alt="' + value.alt +
             '" class="' + count + '"></a>';
         count++;
