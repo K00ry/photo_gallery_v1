@@ -66,6 +66,11 @@
         width: 100%;
         height: 350px;
     }
+    .video{
+        margin: auto;
+        width: 100%;
+        height: 350px;
+    }
     
     #close {
         display: block;
@@ -149,11 +154,13 @@
         .container {
             flex-direction: row;
         }
-        .container img {
+        .container img,
+        .video {
             margin: auto;
             width: 550px;
             height: 350px;
         }
+
         p{max-width: 600px;}
     }
     
@@ -163,8 +170,10 @@
             align-content: space-between;
             width: 980px;
         }
-        .container img {
-           width: 600px;
+        .container img,
+        .video {
+           
             width: 800px;
             height: 500px;
         }
+     
