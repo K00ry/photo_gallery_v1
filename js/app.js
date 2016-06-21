@@ -111,11 +111,10 @@ $(document).ready(function() {
     var $container = $('<div class="container"></div>');
     var $pervbutton = $('<div class="previous"><</div>');
     var $image = $("<img>");
-    var $video = $('<iframe style="width:80%;height:350px;margin:auto;" frameborder="0" allowfullscreen></iframe>');
-    var $close = $('<span id="close">x</span>')
+    var $video = $('<div class="video"><iframe style="width:100%;height:100%;margin:auto;" frameborder="0" allowfullscreen></iframe></div>');
+    var $close = $('<span id="close">x</span>');
     var $nextbutton = $('<div class="next">></div>');
     var $caption = $("<p></p>");
-    var galleryLenght = $(".photogallery a").length;
     var tracker;
 
     //asembeling the overlay
@@ -133,14 +132,14 @@ $(document).ready(function() {
 
     //append the thumnails to the page
     var itemsHtml = '';
-    var count = 0;
+
     $.each(galleryItems, function(item, value) {
 
         itemsHtml += '<a href="images/' + value.href +
             '"><img src="images/Thumbnails/' + value.href +
             '" title="' + value.title + '" alt="' + value.alt +
-            '" class="' + count + '"></a>';
-        count++;
+            '"></a>';
+
 
     });
 
@@ -150,17 +149,23 @@ $(document).ready(function() {
 
         var $val = $(this).val().toLowerCase();
         var $photos = $(".photogallery a").find("img");
-        $photos.parent().fadeOut(500);
+        $photos.parent().hide();
         $photos.each(function() {
 
             var $title = $(this).attr("title").toLowerCase();
+            $title += $(this).attr("alt").toLowerCase();
             if ($title.indexOf($val) != -1) {
-                $(this).parent().fadeIn(500);
+                $(this).parent().fadeIn(800);
+
             }
         });
 
+
     });
 
+
+
+////////////////FUNCTIONS/////////////////
 
 
     // function to show overlay with Image
@@ -171,7 +176,7 @@ $(document).ready(function() {
         $image.before($pervbutton);
         $image.attr("src", 'images/' + galleryItems[tracker].href);
         $image.after($nextbutton);
-        $overlay.fadeIn(500);
+        $overlay.fadeIn(800);
 
     }
 
@@ -182,9 +187,35 @@ $(document).ready(function() {
 
         $container.append($video);
         $video.before($pervbutton);
-        $video.attr("src", galleryItems[tracker].src);
+        $video.children().attr("src", galleryItems[tracker].src);
         $video.after($nextbutton);
-        $overlay.fadeIn(500);
+        $overlay.fadeIn(800);
+    }
+
+
+    // function for checking the tracker and fading to the new one.
+
+    function fading() {
+        if (tracker < 12) {
+            $image.hide();
+            $image.attr("src", 'images/' + galleryItems[tracker].href);
+            $image.fadeIn(800);
+        }
+
+        if (tracker === 12) {
+            $image.hide();
+            $image.replaceWith($video);
+            $video.fadeIn(800);
+        }
+
+        if (tracker === 16) {
+            tracker = 0;
+            $image.hide();
+            $video.replaceWith($image);
+            $image.attr("src", 'images/' + galleryItems[tracker].href);
+            $image.fadeIn(800);
+        }
+
     }
 
 
@@ -222,30 +253,20 @@ $(document).ready(function() {
     });
 
 
+
+
+
+
+
+
     // next button 
 
     $nextbutton.click(function() {
 
         tracker++;
 
-        if (tracker < 12) {
-
-            $image.attr("src", 'images/' + galleryItems[tracker].href);
-
-        }
-
-        if (tracker === 12) {
-            $image.replaceWith($video);
-
-        }
-
-        if (tracker === 16) {
-            tracker = 0;
-            $video.replaceWith($image);
-            $image.attr("src", 'images/' + galleryItems[tracker].href);
-        }
-
-        $video.attr("src", galleryItems[tracker].src);
+        fading();
+        $video.children().attr("src", galleryItems[tracker].src);
         $caption.text(galleryItems[tracker].alt);
 
 
@@ -257,18 +278,31 @@ $(document).ready(function() {
 
         tracker--;
 
+
         if (tracker === 11) {
+            $video.hide();
             $video.replaceWith($image);
+            $video.fadeIn(800);
+
         }
-        if (tracker <= 0) {
+        if (tracker < 0) {
             tracker = 15;
+            $video.hide();
             $image.replaceWith($video);
-            $video.attr("src", galleryItems[tracker].src);
+            $video.children().attr("src", galleryItems[tracker].src);
+            $video.fadeIn(800);
         }
         if (tracker < 16 && tracker >= 12) {
-
-            $video.attr("src", galleryItems[tracker].src);
+            $video.hide();
+            $video.children().attr("src", galleryItems[tracker].src);
+            $video.fadeIn(800);
         }
+        if (tracker < 12) {
+            $image.hide();
+            $image.attr("src", 'images/' + galleryItems[tracker].href);
+            $image.fadeIn(800);
+        }
+
 
 
         $image.attr("src", 'images/' + galleryItems[tracker].href);
@@ -285,7 +319,7 @@ $(document).ready(function() {
     $close.click(function() {
         $image.remove();
         $video.remove();
-        $overlay.fadeOut(500);
+        $overlay.fadeOut(800);
 
     });
 
@@ -298,7 +332,7 @@ $(document).ready(function() {
     $(document).keydown(function(e) {
         if (e.which == 27) {
             $close.click();
-        };
+        }
     });
 
     // next key function.
@@ -307,7 +341,7 @@ $(document).ready(function() {
     $(document).keydown(function(e) {
         if (e.which == 39) {
             $nextbutton.click();
-        };
+        }
     });
 
 
@@ -317,7 +351,7 @@ $(document).ready(function() {
     $(document).keydown(function(e) {
         if (e.which == 37) {
             $pervbutton.click();
-        };
+        }
     });
 
 
