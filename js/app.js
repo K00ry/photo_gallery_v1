@@ -112,10 +112,9 @@ $(document).ready(function() {
     var $pervbutton = $('<div class="previous"><</div>');
     var $image = $("<img>");
     var $video = $('<div class="video"><iframe style="width:100%;height:100%;margin:auto;" frameborder="0" allowfullscreen></iframe></div>');
-    var $close = $('<span id="close">x</span>')
+    var $close = $('<span id="close">x</span>');
     var $nextbutton = $('<div class="next">></div>');
     var $caption = $("<p></p>");
-    var galleryLenght = $(".photogallery a").length;
     var tracker;
 
     //asembeling the overlay
@@ -133,14 +132,14 @@ $(document).ready(function() {
 
     //append the thumnails to the page
     var itemsHtml = '';
-    var count = 0;
+
     $.each(galleryItems, function(item, value) {
 
         itemsHtml += '<a href="images/' + value.href +
             '"><img src="images/Thumbnails/' + value.href +
             '" title="' + value.title + '" alt="' + value.alt +
-            '" class="' + count + '"></a>';
-        count++;
+            '"></a>';
+
 
     });
 
@@ -154,13 +153,19 @@ $(document).ready(function() {
         $photos.each(function() {
 
             var $title = $(this).attr("title").toLowerCase();
+            $title += $(this).attr("alt").toLowerCase();
             if ($title.indexOf($val) != -1) {
                 $(this).parent().fadeIn();
+
             }
         });
 
+
     });
 
+
+
+////////////////FUNCTIONS/////////////////
 
 
     // function to show overlay with Image
@@ -188,9 +193,9 @@ $(document).ready(function() {
     }
 
 
-        // function for checking the tracker and fading to the new one.
+    // function for checking the tracker and fading to the new one.
 
-    function fading (){
+    function fading() {
         if (tracker < 12) {
             $image.hide();
             $image.attr("src", 'images/' + galleryItems[tracker].href);
@@ -211,7 +216,7 @@ $(document).ready(function() {
             $image.fadeIn(800);
         }
 
-    };
+    }
 
 
 
@@ -280,7 +285,7 @@ $(document).ready(function() {
             $video.fadeIn(800);
 
         }
-        if (tracker <= 0) {
+        if (tracker < 0) {
             tracker = 15;
             $video.hide();
             $image.replaceWith($video);
@@ -327,7 +332,7 @@ $(document).ready(function() {
     $(document).keydown(function(e) {
         if (e.which == 27) {
             $close.click();
-        };
+        }
     });
 
     // next key function.
@@ -336,7 +341,7 @@ $(document).ready(function() {
     $(document).keydown(function(e) {
         if (e.which == 39) {
             $nextbutton.click();
-        };
+        }
     });
 
 
@@ -346,7 +351,7 @@ $(document).ready(function() {
     $(document).keydown(function(e) {
         if (e.which == 37) {
             $pervbutton.click();
-        };
+        }
     });
 
 
