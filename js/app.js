@@ -155,7 +155,7 @@ $(document).ready(function() {
             var $title = $(this).attr("title").toLowerCase();
             $title += $(this).attr("alt").toLowerCase();
             if ($title.indexOf($val) != -1) {
-                $(this).parent().fadeIn();
+                $(this).parent().fadeIn(800);
 
             }
         });
