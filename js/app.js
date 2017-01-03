@@ -145,7 +145,7 @@ $(document).ready(function() {
 
     //keyup for input search
 
-    $("input").keyup(function() {
+    $("input").change(function() {
 
         var $val = $(this).val().toLowerCase();
         var $photos = $(".photogallery a").find("img");
